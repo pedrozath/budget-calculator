@@ -15,13 +15,14 @@ Budget.prototype = {
 
     calculate: function(){
         var hour_income = this.get_value("monthly-income")/22/8;
-        var hours = this.get_value("hours");
         var risk = this.get_value("risk");
+        var hours = this.get_value("hours")/(1-(risk/100));
         var profit = this.get_value("profit");
         var tax = this.get_value("tax");
         var urgency = this.get_value("urgency");
         var trading = this.get_value("trading");
-        var taxes = (risk+profit+tax+urgency+trading)/100;
+
+        var taxes = (profit+tax+urgency+trading)/100;
         var final_value = (hour_income * hours) / (1-taxes);
 
         if(final_value > 0) { 
